@@ -1,1 +1,1 @@
-# CS-362
+# CS-362 Project
