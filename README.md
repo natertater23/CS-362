@@ -1,4 +1,4 @@
-# CS-362 Project
+# CS-362 Book Loan Project
 
 Anthony Cardenas natertater23@csu.fullerton.edu
 
