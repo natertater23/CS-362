@@ -1,3 +1,7 @@
 # CS-362 Project
 
-We out here getting hoes.
+Anthony Cardenas natertater23@csu.fullerton.edu
+
+Justin Castillo
+
+Victoria Tran 
