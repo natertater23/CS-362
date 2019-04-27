@@ -16,6 +16,13 @@ import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class GUI extends JFrame {
 
@@ -28,6 +35,9 @@ public class GUI extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
 
 	/**
 	 * Launch the application.
@@ -62,8 +72,8 @@ public class GUI extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Welcome to Book Advantage");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		lblNewLabel.setBounds(12, 13, 263, 56);
+		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
+		lblNewLabel.setBounds(12, 48, 356, 60);
 		panel.add(lblNewLabel);
 		
 		JLabel lblEnterId = new JLabel("Enter ID:");
@@ -89,7 +99,7 @@ public class GUI extends JFrame {
 		panel.add(btnEnter);
 		
 		JButton btnSignUpHere = new JButton("Sign Up Here");
-		btnSignUpHere.setBounds(12, 430, 118, 25);
+		btnSignUpHere.setBounds(285, 414, 118, 25);
 		panel.add(btnSignUpHere);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
@@ -146,9 +156,31 @@ public class GUI extends JFrame {
 		
 		textField_4 = new JTextField();
 		textField_4.setEditable(false);
-		textField_4.setBounds(413, 65, 284, 377);
+		textField_4.setBounds(413, 65, 284, 339);
 		panel_2.add(textField_4);
 		textField_4.setColumns(10);
+		
+		textField_9 = new JTextField();
+		textField_9.setBounds(208, 382, 133, 22);
+		panel_2.add(textField_9);
+		textField_9.setColumns(10);
+		
+		textField_10 = new JTextField();
+		textField_10.setBounds(12, 382, 116, 22);
+		panel_2.add(textField_10);
+		textField_10.setColumns(10);
+		
+		JButton btnExitSave = new JButton("Exit & Save");
+		btnExitSave.setBounds(600, 417, 97, 25);
+		panel_2.add(btnExitSave);
+		
+		JButton btnNewButton_6 = new JButton("Return Book ");
+		btnNewButton_6.setBounds(12, 417, 116, 25);
+		panel_2.add(btnNewButton_6);
+		
+		JButton btnNewButton_5 = new JButton("Check Out Book \r\n");
+		btnNewButton_5.setBounds(208, 417, 133, 25);
+		panel_2.add(btnNewButton_5);
 		
 		JLabel lblNewLabel_3 = new JLabel("Eligible Courses:");
 		lblNewLabel_3.setBounds(12, 36, 177, 16);
@@ -173,16 +205,16 @@ public class GUI extends JFrame {
 		panel_3.add(lblAdminPage);
 		
 		JButton btnAddCourse = new JButton("Add Course");
-		btnAddCourse.setBounds(162, 365, 140, 25);
+		btnAddCourse.setBounds(90, 365, 140, 25);
 		panel_3.add(btnAddCourse);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(162, 326, 140, 22);
+		textField_5.setBounds(154, 330, 140, 22);
 		panel_3.add(textField_5);
 		textField_5.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Remove Course\r\n");
-		btnNewButton.setBounds(162, 419, 140, 25);
+		btnNewButton.setBounds(90, 402, 140, 25);
 		panel_3.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Activate Course\r\n");
@@ -192,29 +224,68 @@ public class GUI extends JFrame {
 				// Type code here 
 			}
 		});
-		btnNewButton_1.setBounds(443, 365, 140, 25);
+		btnNewButton_1.setBounds(242, 365, 140, 25);
 		panel_3.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Deactivate Course");
-		btnNewButton_2.setBounds(443, 419, 140, 25);
+		btnNewButton_2.setBounds(242, 402, 140, 25);
 		panel_3.add(btnNewButton_2);
 		
 		textField_6 = new JTextField();
 		textField_6.setEditable(false);
-		textField_6.setBounds(443, 13, 235, 285);
+		textField_6.setBounds(443, 101, 235, 216);
 		panel_3.add(textField_6);
 		textField_6.setColumns(10);
 		
 		textField_7 = new JTextField();
-		textField_7.setBounds(443, 326, 140, 22);
+		textField_7.setBounds(443, 330, 127, 22);
 		panel_3.add(textField_7);
 		textField_7.setColumns(10);
+		
+		textField_8 = new JTextField();
+		textField_8.setBounds(154, 101, 198, 216);
+		panel_3.add(textField_8);
+		textField_8.setColumns(10);
+		
+		JButton btnNewButton_4 = new JButton("Remove Book");
+		btnNewButton_4.setBounds(443, 415, 127, 25);
+		panel_3.add(btnNewButton_4);
+		
+		JButton btnNewButton_3 = new JButton("Add Book");
+		btnNewButton_3.setBounds(443, 377, 127, 25);
+		panel_3.add(btnNewButton_3);
 		
 		JLabel lblNewLabel_5 = new JLabel("New label");
 		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Ant\\Desktop\\vintage-open-book-image-graphi.png"));
 		lblNewLabel_5.setBounds(-12, 0, 709, 468);
 		
 		panel_3.add(lblNewLabel_5);
+		
+		String directory = System.getProperty("user.home");  
+		String fileName = "sample.txt";  
+		String absolutePath = directory + File.separator + fileName;
+
+		// write the content in file 
+		try(BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(absolutePath))) {  
+		    String fileContent = "This is a sample text.";
+		    bufferedOutputStream.write(fileContent.getBytes());
+		} catch (IOException e) {
+		    // exception handling
+		}
+
+		// read the content from file
+		try(BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(absolutePath))) {  
+		    int ch = bufferedInputStream.read();
+		    while(ch != -1) {
+		        System.out.print((char)ch);
+		        ch = bufferedInputStream.read();
+		    }
+		} catch (FileNotFoundException e) {
+		    // exception handling
+		} catch (IOException e) {
+		    // exception handling
+		}
+		
 		
 	}
 }
