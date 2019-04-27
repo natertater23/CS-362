@@ -23,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI extends JFrame {
 
@@ -38,6 +40,7 @@ public class GUI extends JFrame {
 	private JTextField textField_8;
 	private JTextField textField_9;
 	private JTextField textField_10;
+	private JTextField textField_11;
 
 	/**
 	 * Launch the application.
@@ -95,10 +98,25 @@ public class GUI extends JFrame {
 		textField_1.setColumns(10);
 		
 		JButton btnEnter = new JButton("Enter");
+		btnEnter.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String id = textField.getText();
+				String pass = textField_1.getText();
+				
+				// read txt file or check arr here and switch to corresponding pane 
+			}
+		});
 		btnEnter.setBounds(12, 301, 97, 25);
 		panel.add(btnEnter);
 		
 		JButton btnSignUpHere = new JButton("Sign Up Here");
+		btnSignUpHere.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// change pane to sign up pane 
+			}
+		});
 		btnSignUpHere.setBounds(285, 414, 118, 25);
 		panel.add(btnSignUpHere);
 		
@@ -132,6 +150,15 @@ public class GUI extends JFrame {
 		textField_3.setColumns(10);
 		
 		JButton btnEnter_1 = new JButton("Enter");
+		btnEnter_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String id = textField_2.getText();
+				String pass = textField_3.getText();
+				
+				// write it to the txt file here or add to arr 
+			}
+		});
 		btnEnter_1.setBounds(442, 185, 116, 25);
 		panel_1.add(btnEnter_1);
 		
@@ -156,7 +183,7 @@ public class GUI extends JFrame {
 		
 		textField_4 = new JTextField();
 		textField_4.setEditable(false);
-		textField_4.setBounds(413, 65, 284, 339);
+		textField_4.setBounds(413, 65, 284, 169);
 		panel_2.add(textField_4);
 		textField_4.setColumns(10);
 		
@@ -171,14 +198,40 @@ public class GUI extends JFrame {
 		textField_10.setColumns(10);
 		
 		JButton btnExitSave = new JButton("Exit & Save");
+		btnExitSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// just exit app here 
+			}
+		});
+		
+		textField_11 = new JTextField();
+		textField_11.setEditable(false);
+		textField_11.setBounds(413, 260, 284, 144);
+		panel_2.add(textField_11);
+		textField_11.setColumns(10);
 		btnExitSave.setBounds(600, 417, 97, 25);
 		panel_2.add(btnExitSave);
 		
 		JButton btnNewButton_6 = new JButton("Return Book ");
+		btnNewButton_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String bookName = textField_9.getText();
+				// mark it returned 
+			}
+		});
 		btnNewButton_6.setBounds(12, 417, 116, 25);
 		panel_2.add(btnNewButton_6);
 		
 		JButton btnNewButton_5 = new JButton("Check Out Book \r\n");
+		btnNewButton_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String bookName = textField_10.getText();
+				// mark it loaned 
+			}
+		});
 		btnNewButton_5.setBounds(208, 417, 133, 25);
 		panel_2.add(btnNewButton_5);
 		
@@ -205,6 +258,13 @@ public class GUI extends JFrame {
 		panel_3.add(lblAdminPage);
 		
 		JButton btnAddCourse = new JButton("Add Course");
+		btnAddCourse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String name = textField_5.getText();
+				// Add course to list
+			}
+		});
 		btnAddCourse.setBounds(90, 365, 140, 25);
 		panel_3.add(btnAddCourse);
 		
@@ -214,6 +274,13 @@ public class GUI extends JFrame {
 		textField_5.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Remove Course\r\n");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String name = textField_5.getText();
+				// Remove course from list
+			}
+		});
 		btnNewButton.setBounds(90, 402, 140, 25);
 		panel_3.add(btnNewButton);
 		
@@ -222,12 +289,21 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// Type code here 
+				String name = textField_5.getText();
+				// Make it de-gray
 			}
 		});
 		btnNewButton_1.setBounds(242, 365, 140, 25);
 		panel_3.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Deactivate Course");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String name = textField_5.getText();
+				// Gray out class 
+			}
+		});
 		btnNewButton_2.setBounds(242, 402, 140, 25);
 		panel_3.add(btnNewButton_2);
 		
@@ -243,15 +319,29 @@ public class GUI extends JFrame {
 		textField_7.setColumns(10);
 		
 		textField_8 = new JTextField();
+		textField_8.setEditable(false);
 		textField_8.setBounds(154, 101, 198, 216);
 		panel_3.add(textField_8);
 		textField_8.setColumns(10);
 		
 		JButton btnNewButton_4 = new JButton("Remove Book");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String bookName = textField_7.getText();
+				// Remove Book from list 
+			}
+		});
 		btnNewButton_4.setBounds(443, 415, 127, 25);
 		panel_3.add(btnNewButton_4);
 		
 		JButton btnNewButton_3 = new JButton("Add Book");
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String bookName = textField_7.getText();
+				// Add Book to list 
+			}
+		});
 		btnNewButton_3.setBounds(443, 377, 127, 25);
 		panel_3.add(btnNewButton_3);
 		
