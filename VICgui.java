@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -70,9 +69,10 @@ public class GUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(bookLayout);
-	//	setLayout(bookLayout);
+		contentPane.setLayout(new BorderLayout());
+		setLayout(bookLayout);
 		
+		//PANEL 1: WELCOME PAGE
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "IntroPage");
 		panel.setLayout(null);
@@ -113,6 +113,7 @@ public class GUI extends JFrame {
 		lblNewLabel_1.setBounds(0, -25, 853, 512);
 		panel.add(lblNewLabel_1);
 		
+		//PANEL 2: CREATE ACCOUNT PAGE
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, "CreatePage");
 		panel_1.setLayout(null);
@@ -152,6 +153,7 @@ public class GUI extends JFrame {
 		lblNewLabel_2.setBounds(0, 0, 737, 468);
 		panel_1.add(lblNewLabel_2);
 		
+		//PANEL 3: STUDENT PAGE
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, "StudentPage");
 		panel_2.setLayout(null);
@@ -203,10 +205,11 @@ public class GUI extends JFrame {
 		panel_2.add(lblTextbooks);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Ant\\Desktop\\dT9rzapBc.png"));
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Pile-of-books.jpg"));
 		lblNewLabel_4.setBounds(-135, -16, 844, 538);
 		panel_2.add(lblNewLabel_4);
 		
+		//PANEL 4: ADMIN PAGE
 		JPanel panel_3 = new JPanel();
 		contentPane.add(panel_3, "AdminPage");
 		panel_3.setLayout(null);
@@ -263,12 +266,12 @@ public class GUI extends JFrame {
 		panel_3.add(btnAddBook);
 		
 		JLabel lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Ant\\Desktop\\vintage-open-book-image-graphi.png"));
+		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\vintage-open-book-image-graphi.png"));
 		lblNewLabel_5.setBounds(-12, 0, 709, 468);
 		
 		panel_3.add(lblNewLabel_5);
 		
-		//BUTTON LISTENERS
+		//*****BUTTON LISTENERS******
 
 		//Intro Enter Button 
 		btnEnterIntro.addMouseListener(new MouseAdapter() {
@@ -278,7 +281,14 @@ public class GUI extends JFrame {
 				String pass = textField_1.getText();
 				
 				// read txt file or check arr here and switch to corresponding pane 
+				//if ID is student
+				//bookLayout.show(getContentPane(), "StudentPage");
 				
+				//if ID is admin
+				//bookLayout.show(getContentPane(), "AdminPage");
+				
+				//else
+				//jlabel that says INCORRECT PASSWORD OR ID
 			}
 		});
 
@@ -287,7 +297,7 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// change pane to sign up pane 
-			//	bookLayout.show(panel_1,"CreatePage");
+				bookLayout.show(getContentPane(), "CreatePage");
 			}
 		});
 
@@ -296,12 +306,12 @@ public class GUI extends JFrame {
 		 btnCreateEnter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				//IF ADMIN
+				//bookLayout.show(getContentPane(), "AdminPage");
+				//IF STUDENT
+				//bookLayout.show(getContentPane(), "StudentPage");
 			}
 		});
-
-
-
 
 		//EXIT &SAVE
 		btnExitSave.addMouseListener(new MouseAdapter() {
@@ -352,7 +362,6 @@ public class GUI extends JFrame {
 		btnActCourse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// Type code here 
 				String name = textField_5.getText();
 				// Make it de-gray
 			}
@@ -384,6 +393,13 @@ public class GUI extends JFrame {
 			}
 		});
 
+		
+		
+		
+		
+		
+		
+		
 		
 		String directory = System.getProperty("user.home");  
 		String fileName = "sample.txt";  
