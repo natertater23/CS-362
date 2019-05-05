@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -45,6 +46,9 @@ public class GUI extends JFrame {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
+	
+	
+	CardLayout bookLayout = new CardLayout();
 
 	/**
 	 * Launch the application.
@@ -66,13 +70,16 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
-		setTitle("Book Advantage");
+		setTitle("Book Advantagitge");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 737, 525);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout(0, 0));
+		contentPane.setLayout(new BorderLayout());
+		setLayout(bookLayout);
+		//contentPane.setLayout(new CardLayout(0, 0));
+		
 		
 		String directory = System.getProperty("user.home");  
 		String fileName = "sample.txt";  
@@ -81,20 +88,131 @@ public class GUI extends JFrame {
 		// read in all the info from the text files and load them into Arrays for quick access 
 		// Course, book, admin , student 
 		
+		// CREATE ArrayList here 
+		ArrayList<Student> StudentArr = new ArrayList<Student>();
+		ArrayList<Admin> AdminArr = new ArrayList<Admin>();
+		ArrayList<Course> CoursesArr = new ArrayList<Course>(); // all available courses 
+		ArrayList<Course> StudentCoursesArr = new ArrayList<Course>();
+		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
+		ArrayList<Book> StudentBookArr = new ArrayList<Book>();
+		
+		// new classes 
+		// StudentCourseArray
+		//(email, arraylist<courses>)
+		//StudentBookArray
+		//(email,arraylist<books>
+		
+		// This is to help us match a student to its books and courses
+
+		
+		//Read in Student 
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 		    String line = bufferedReader.readLine();
 		    while(line != null) {
 		        System.out.println(line);
 		        line = bufferedReader.readLine();
+		        String id = line.substring(0, line.indexOf(" ")); 
+		        line = line.substring(line.indexOf(" "));
+		        String pass = line.substring(0, line.indexOf(" "));
+		        line = line.substring(line.indexOf(" "));
+		        String name = line.substring(0, line.indexOf(" "));;
+		        // Read in student courses and books
+		        for(int i = 0 ; i<StudentCoursesArr.size();i++)
+		        {
+		        	//
+		        }
+		       Student temp = new Student(name,id,pass);
+		       StudentArr.add(temp);
 		    }
 		} catch (FileNotFoundException e) {
 		    // exception handling
 		} catch (IOException e) {
 		    // exception handling
 		}
-		
+		//Read in Admin 
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				    String line = bufferedReader.readLine();
+				    while(line != null) {
+				        System.out.println(line);
+				        line = bufferedReader.readLine();
+				        String id = line.substring(0, line.indexOf(" ")); 
+				        line = line.substring(line.indexOf(" "));
+				        String pass = line.substring(0, line.indexOf(" "));
+				        line = line.substring(line.indexOf(" "));
+				        String name = line.substring(0, line.indexOf(" "));;
+				        
+				       Admin temp = new Admin(name,id,pass);
+				       AdminArr.add(temp);
+				    }
+				} catch (FileNotFoundException e) {
+				    // exception handling
+				} catch (IOException e) {
+				    // exception handling
+				}
+				//Read in courses
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				    String line = bufferedReader.readLine();
+				    while(line != null) {
+				        System.out.println(line);
+				        line = bufferedReader.readLine();
+				        String id = line.substring(0, line.indexOf(" ")); 
+				        line = line.substring(line.indexOf(" "));
+				        String pass = line.substring(0, line.indexOf(" "));
+				        line = line.substring(line.indexOf(" "));
+				        String name = line.substring(0, line.indexOf(" "));;
+				        
+				       Student temp = new Student(id,pass,name);
+				       StudentArr.add(temp);
+				    }
+				} catch (FileNotFoundException e) {
+				    // exception handling
+				} catch (IOException e) {
+				    // exception handling
+				}
+				//Read in Available Books
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				    String line = bufferedReader.readLine();
+				    while(line != null) {
+				        System.out.println(line);
+				        line = bufferedReader.readLine();
+				        String id = line.substring(0, line.indexOf(" ")); 
+				        line = line.substring(line.indexOf(" "));
+				        String pass = line.substring(0, line.indexOf(" "));
+				        line = line.substring(line.indexOf(" "));
+				        String name = line.substring(0, line.indexOf(" "));;
+				        
+				       Student temp = new Student(id,pass,name);
+				       StudentArr.add(temp);
+				    }
+				} catch (FileNotFoundException e) {
+				    // exception handling
+				} catch (IOException e) {
+				    // exception handling
+				}
+				
+				// read in loaned Books
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				    String line = bufferedReader.readLine();
+				    while(line != null) {
+				        System.out.println(line);
+				        line = bufferedReader.readLine();
+				        String id = line.substring(0, line.indexOf(" ")); 
+				        line = line.substring(line.indexOf(" "));
+				        String pass = line.substring(0, line.indexOf(" "));
+				        line = line.substring(line.indexOf(" "));
+				        String name = line.substring(0, line.indexOf(" "));;
+				        
+				       Student temp = new Student(id,pass,name);
+				       StudentArr.add(temp);
+				    }
+				} catch (FileNotFoundException e) {
+				    // exception handling
+				} catch (IOException e) {
+				    // exception handling
+				}
+				
 		JPanel panel = new JPanel();
-		contentPane.add(panel, "name_6377821138327491");
+		contentPane.add(panel, "IntroPage");
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Welcome to Book Advantage");
@@ -127,6 +245,21 @@ public class GUI extends JFrame {
 				String id = textField.getText();
 				String pass = textField_1.getText();
 				
+				for(int i = 0 ; i< StudentArr.size();i++) {
+					if(id == StudentArr.get(i).getEmail() && pass == StudentArr.get(i).getPassword() )
+					{
+						bookLayout.show(getContentPane(), "StudentPage");
+					}
+					else if(id == AdminArr.get(i).getEmail() && pass == AdminArr.get(i).getPassword() ){
+						bookLayout.show(getContentPane(), "AdminPage");
+					}
+					
+				}
+				// Else reload student page or send error message, clear entries ? 
+				
+				
+				
+				
 				// read txt file or check arr here and switch to corresponding pane 
 			}
 		});
@@ -144,7 +277,7 @@ public class GUI extends JFrame {
 		btnSignUpHere.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// change pane to sign up pane 
+				bookLayout.show(getContentPane(), "CreatePage");
 			}
 		});
 		btnSignUpHere.setBounds(285, 414, 118, 25);
@@ -156,7 +289,7 @@ public class GUI extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, "name_6377843307333427");
+		contentPane.add(panel_1, "CreatePage");
 		panel_1.setLayout(null);
 		
 		JLabel lblCreateId = new JLabel("Create ID: ");
@@ -185,6 +318,19 @@ public class GUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String id = textField_2.getText();
 				String pass = textField_3.getText();
+				String name = "";
+				
+				Student temp = new Student(name,id,pass);
+				
+				StudentArr.add(temp);
+				
+				// write the content in file 
+				try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+				    String fileContent = name + " " + id + " " + pass ;
+				    bufferedWriter.write(fileContent);
+				} catch (IOException e1) {
+				    // exception handling
+				}
 				
 				// write it to the txt file here or add to arr 
 			}
@@ -204,7 +350,7 @@ public class GUI extends JFrame {
 		panel_1.add(lblNewLabel_2);
 		
 		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, "name_6378735013698833");
+		contentPane.add(panel_2, "StudentPage");
 		panel_2.setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
@@ -279,7 +425,7 @@ public class GUI extends JFrame {
 		panel_2.add(lblNewLabel_4);
 		
 		JPanel panel_3 = new JPanel();
-		contentPane.add(panel_3, "name_6379662685985548");
+		contentPane.add(panel_3, "AdminPage");
 		panel_3.setLayout(null);
 		
 		JLabel lblAdminPage = new JLabel("Admin Page");
@@ -381,29 +527,7 @@ public class GUI extends JFrame {
 		
 		panel_3.add(lblNewLabel_5);
 		
-		
 
-		// write the content in file 
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "This is a sample text.";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e) {
-		    // exception handling
-		}
-
-		// read the content from file
-		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
-		    String line = bufferedReader.readLine();
-		    while(line != null) {
-		        System.out.println(line);
-		        line = bufferedReader.readLine();
-		    }
-		} catch (FileNotFoundException e) {
-		    // exception handling
-		} catch (IOException e) {
-		    // exception handling
-		}
-		
 		
 	}
 }
