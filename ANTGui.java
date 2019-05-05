@@ -77,7 +77,7 @@ public class GUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
-		setLayout(bookLayout);
+		getContentPane().setLayout(bookLayout);
 		//contentPane.setLayout(new CardLayout(0, 0));
 		
 		
@@ -149,7 +149,7 @@ public class GUI extends JFrame {
 				} catch (IOException e) {
 				    // exception handling
 				}
-				//Read in courses
+				//Read in courses TODO
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
@@ -169,7 +169,7 @@ public class GUI extends JFrame {
 				} catch (IOException e) {
 				    // exception handling
 				}
-				//Read in Available Books
+				//Read in Available Books TODO
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
@@ -190,7 +190,7 @@ public class GUI extends JFrame {
 				    // exception handling
 				}
 				
-				// read in loaned Books
+				// read in loaned Books TODO
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
@@ -238,37 +238,45 @@ public class GUI extends JFrame {
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
+		JLabel lblIncorrect = new JLabel("INCORRECT");
+		lblIncorrect.setForeground(Color.RED);
+		lblIncorrect.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lblIncorrect.setEnabled(false);
+		lblIncorrect.setBounds(185, 365, 116, 16);
+		
+		
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String id = textField.getText();
 				String pass = textField_1.getText();
+				boolean flag = false; 
 				
 				for(int i = 0 ; i< StudentArr.size();i++) {
 					if(id == StudentArr.get(i).getEmail() && pass == StudentArr.get(i).getPassword() )
 					{
 						bookLayout.show(getContentPane(), "StudentPage");
+						//TODO rememeber the id and pass 
+						flag = true;
 					}
 					else if(id == AdminArr.get(i).getEmail() && pass == AdminArr.get(i).getPassword() ){
 						bookLayout.show(getContentPane(), "AdminPage");
+						//TODO remember the id and pass
+						flag = true;
 					}
 					
 				}
-				// Else reload student page or send error message, clear entries ? 
 				
+				textField.setText("");
+				textField_1.setText("");
+				 
+				lblIncorrect.setEnabled(!flag); // Incorrect thing lights up red
 				
-				
-				
-				// read txt file or check arr here and switch to corresponding pane 
 			}
 		});
 		
-		JLabel lblIncorrect = new JLabel("INCORRECT");
-		lblIncorrect.setForeground(Color.RED);
-		lblIncorrect.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		lblIncorrect.setEnabled(false);
-		lblIncorrect.setBounds(185, 365, 116, 16);
+		
 		panel.add(lblIncorrect);
 		btnEnter.setBounds(12, 301, 97, 25);
 		panel.add(btnEnter);
@@ -322,7 +330,8 @@ public class GUI extends JFrame {
 				
 				Student temp = new Student(name,id,pass);
 				
-				StudentArr.add(temp);
+				StudentArr.add(temp); // iff not already there TODO 
+				
 				
 				// write the content in file 
 				try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
@@ -332,7 +341,8 @@ public class GUI extends JFrame {
 				    // exception handling
 				}
 				
-				// write it to the txt file here or add to arr 
+				bookLayout.show(getContentPane(),"IntroPage");
+				
 			}
 		});
 		btnEnter_1.setBounds(442, 185, 116, 25);
@@ -353,10 +363,14 @@ public class GUI extends JFrame {
 		contentPane.add(panel_2, "StudentPage");
 		panel_2.setLayout(null);
 		
+		
+		// This is where we list the avail courses to the student 
+		// with the saved id and pass we get it from the arr 	
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(12, 78, 177, 36);
 		panel_2.add(comboBox);
 		
+		//Display avail books to the selected class on 4
 		textField_4 = new JTextField();
 		textField_4.setEditable(false);
 		textField_4.setBounds(413, 65, 284, 169);
@@ -380,7 +394,7 @@ public class GUI extends JFrame {
 				// just exit app here 
 			}
 		});
-		
+		// display loaned out books on 11
 		textField_11 = new JTextField();
 		textField_11.setEditable(false);
 		textField_11.setBounds(413, 260, 284, 144);
