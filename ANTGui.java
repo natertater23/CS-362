@@ -88,23 +88,13 @@ public class GUI extends JFrame {
 		// read in all the info from the text files and load them into Arrays for quick access 
 		// Course, book, admin , student 
 		
-		// CREATE ArrayList here 
 		ArrayList<Student> StudentArr = new ArrayList<Student>();
 		ArrayList<Admin> AdminArr = new ArrayList<Admin>();
 		ArrayList<Course> CoursesArr = new ArrayList<Course>(); // all available courses 
 		ArrayList<Course> StudentCoursesArr = new ArrayList<Course>();
 		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
 		ArrayList<Book> StudentBookArr = new ArrayList<Book>();
-		
-		// new classes 
-		// StudentCourseArray
-		//(email, arraylist<courses>)
-		//StudentBookArray
-		//(email,arraylist<books>
-		
-		// This is to help us match a student to its books and courses
-
-		
+			
 		//Read in Student 
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 		    String line = bufferedReader.readLine();
