@@ -88,13 +88,23 @@ public class GUI extends JFrame {
 		// read in all the info from the text files and load them into Arrays for quick access 
 		// Course, book, admin , student 
 		
+		// CREATE ArrayList here 
 		ArrayList<Student> StudentArr = new ArrayList<Student>();
 		ArrayList<Admin> AdminArr = new ArrayList<Admin>();
 		ArrayList<Course> CoursesArr = new ArrayList<Course>(); // all available courses 
 		ArrayList<Course> StudentCoursesArr = new ArrayList<Course>();
 		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
 		ArrayList<Book> StudentBookArr = new ArrayList<Book>();
-			
+		
+		// new classes 
+		// StudentCourseArray
+		//(email, arraylist<courses>)
+		//StudentBookArray
+		//(email,arraylist<books>
+		
+		// This is to help us match a student to its books and courses
+
+		
 		//Read in Student 
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 		    String line = bufferedReader.readLine();
@@ -447,7 +457,7 @@ public class GUI extends JFrame {
 		});
 		btnAddCourse.setBounds(90, 365, 140, 25);
 		panel_3.add(btnAddCourse);
-		
+		// 5 is the field for course remove/add/deactivate/activate
 		textField_5 = new JTextField();
 		textField_5.setBounds(154, 330, 140, 22);
 		panel_3.add(textField_5);
@@ -486,18 +496,18 @@ public class GUI extends JFrame {
 		});
 		btnNewButton_2.setBounds(242, 402, 140, 25);
 		panel_3.add(btnNewButton_2);
-		
+		//ALL BOOKS DISPLAYED HERE 
 		textField_6 = new JTextField();
 		textField_6.setEditable(false);
 		textField_6.setBounds(443, 101, 235, 216);
 		panel_3.add(textField_6);
 		textField_6.setColumns(10);
-		
+		// 7 is for the book remove/add
 		textField_7 = new JTextField();
 		textField_7.setBounds(443, 330, 127, 22);
 		panel_3.add(textField_7);
 		textField_7.setColumns(10);
-		
+		// ALL COURSES DISPLAYED HERE ? 
 		textField_8 = new JTextField();
 		textField_8.setEditable(false);
 		textField_8.setBounds(154, 101, 198, 216);
