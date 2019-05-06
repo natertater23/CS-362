@@ -1,81 +1,38 @@
 import java.util.*;
 
-public class Student {
-	private String name, email, password;//potential id
-	StudentCourseArray courses = new StudentCourseArray();
-	StudentBookArray loanedBooks = new StudentBookArray();
+public class StudentBookArray {
+	private String email;
+	private ArrayList <Book> books;	
 	
-	public Student(String name, String email, String password, StudentCourseArray courses, StudentBookArray loanedBooks) {
-		this.name = name;
+	public StudentBookArray(String email, ArrayList <Book> books) {
 		this.email = email;
-		this.password = password;
-		this.courses = courses;
-		this.loanedBooks = loanedBooks;
-	}
-	
-	public Student(String name, String email, String password) {
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
-	
-	public Student() {
-		name = "Unavailable";
+		this.books = books;
+	}	
+
+	public StudentBookArray() {
 		email = "";
-		password = "";
+		books = {};
 	}
-
 	
-	public String getName() {
-		return name;	}
+	
+	public int size() {
+		return books.size();	}
 	public String getEmail() {
-		return email;	}
-	public String getPassword() {
-		return password;	}
-	public StudentCourseArray getCourseArr(){
-		return courses;	}
-	public StudentBookArray getBookArr(){
-		return loanedBooks;	}
-	public int totalLoaned() {
-		return loanedBooks.size();	}
-	public int totalCourses() {
-		return courses.size();	}
+		return email;	}	
+	public ArrayList <Courses> getBooks() {	//returns an array of books
+		return books;	}
 	
-	public void addCourse(Course course) {
-		courses.addCourse(course);	}
-	public void addBook(Book book) {
-		loanedBooks.addBook(book);	}
-	public void removeCourse(Course course) {
-		courses.removeCourse(course);	}
+	
+	public void addCourse(Course book) {
+		books.add(book);	}
 	public void removeBook(Book book) {
-		loanedBooks.removeBook(book);	}
-
-	
-	public String displayLoanedBooks() {
-		return loanedBooks.displayBooks();	}
-	public String displayCourses() {
-		return courses.displayCourses();	}
+		books.remove(book);	}
 	
 	
-	public void editProfile() {//Need to do
-		//change name
-		
-		//change email
-		
-		//change password
+	public String displayBooks() { //returns a string of all books in one line
+		String str = books.get(0);
+		for(int i = 1; i < books.size(); i++) 
+			str += " " + books.get(i).getName();
+		return str;
 	}
-	
-	
-	public void loan(Book book) {//Need to do***
-		book.loan(this);
-		loanedBooks.add(book);
-	}
-	
-	
-	public String toString() {
-		if(!name.equals("Unavailable"))	//student exists
-			return "Student name: " + name + "\nStudent email: " + email;
-		return "N/A";
-	}
-
 }
