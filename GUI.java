@@ -302,6 +302,7 @@ public class GUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String name = textField_5.getText();
 				// Gray out class 
+			textField5.setEnabled(false);
 			}
 		});
 		btnNewButton_2.setBounds(242, 402, 140, 25);
