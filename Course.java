@@ -60,7 +60,7 @@ public class Course {
 			output += "active";
 		else
 			output += "inactive";
-		return output;
+		return (output + "\n\n");
 	}
 	
 

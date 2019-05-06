@@ -24,7 +24,7 @@ public class StudentCourseArray {
 		return courses;	}
 	
 	
-	public void addCourse(Course course);{
+	public void addCourse(Course course){
 		courses.add(course);	}
 	public void removeCourse(Course course) {
 		courses.remove(course);	}
@@ -35,6 +35,14 @@ public class StudentCourseArray {
 		for(int i = 1; i < courses.size(); i++) 
 			str += " " + courses.get(i).getName();
 		return str;
+	}
+	
+	public String toString() {
+		String output = "List of courses for " + email + ":";
+		for (int i = 0; i < size(); i++) {
+			output += "\n -" + courses.get(i);
+		}
+		return (output + "\n\n");
 	}
 
 }

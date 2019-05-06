@@ -33,5 +33,9 @@ public class Admin {
 	public void deactivateCourse(Course course) {
 		course.deactivate();	}
 	
+	
+	public String toString() {
+		return ("Admin: " + name + "\nEmail: " +  email + "\n\n");
+	}
 
 }

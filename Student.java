@@ -74,8 +74,8 @@ public class Student {
 	
 	public String toString() {
 		if(!name.equals("Unavailable"))	//student exists
-			return "Student name: " + name + "\nStudent email: " + email;
-		return "N/A";
+			return ("Student name: " + name + "\nStudent email: " + email + "\n\n");
+		return "N/A\n\n";
 	}
 
 }

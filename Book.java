@@ -47,7 +47,7 @@ public class Book {
 	
 	public String toString() {
 		if(loaned)
-			return (name + " was loaned on " + checkOutDate.toString() + " and is due by " + dueDate.toString());
-		return (name + " is not currenty loaned");
+			return (name + " was loaned on " + checkOutDate.toString() + " and is due by " + dueDate.toString() + "\n\n");
+		return (name + " is not currenty loaned\n\n");
 	}
 }
