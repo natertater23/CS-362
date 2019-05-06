@@ -46,6 +46,8 @@ public class GUI extends JFrame {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
+	String myId = "";
+	String mypass = "";
 	
 	
 	CardLayout bookLayout = new CardLayout();
@@ -96,15 +98,6 @@ public class GUI extends JFrame {
 		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
 		ArrayList<Book> StudentBookArr = new ArrayList<Book>();
 		
-		// new classes 
-		// StudentCourseArray
-		//(email, arraylist<courses>)
-		//StudentBookArray
-		//(email,arraylist<books>
-		
-		// This is to help us match a student to its books and courses
-
-		
 		//Read in Student 
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 		    String line = bufferedReader.readLine();
@@ -116,10 +109,10 @@ public class GUI extends JFrame {
 		        String pass = line.substring(0, line.indexOf(" "));
 		        line = line.substring(line.indexOf(" "));
 		        String name = line.substring(0, line.indexOf(" "));;
-		        // Read in student courses and books
+		        // Read in student courses and books and add them to students
 		        for(int i = 0 ; i<StudentCoursesArr.size();i++)
 		        {
-		        	//
+		        	// 
 		        }
 		       Student temp = new Student(name,id,pass);
 		       StudentArr.add(temp);
@@ -245,6 +238,7 @@ public class GUI extends JFrame {
 		lblIncorrect.setBounds(185, 365, 116, 16);
 		
 		
+		
 		JButton btnEnter = new JButton("Enter");
 		btnEnter.addMouseListener(new MouseAdapter() {
 			@Override
@@ -257,17 +251,19 @@ public class GUI extends JFrame {
 					if(id == StudentArr.get(i).getEmail() && pass == StudentArr.get(i).getPassword() )
 					{
 						bookLayout.show(getContentPane(), "StudentPage");
-						//TODO rememeber the id and pass 
+						myId = id;
+						mypass = pass; 
 						flag = true;
 					}
 					else if(id == AdminArr.get(i).getEmail() && pass == AdminArr.get(i).getPassword() ){
-						bookLayout.show(getContentPane(), "AdminPage");
-						//TODO remember the id and pass
+						bookLayout.show(getContentPane(), "AdminPage");					
+						myId = id;
+						mypass = pass; 
 						flag = true;
 					}
 					
 				}
-				
+				// reset text
 				textField.setText("");
 				textField_1.setText("");
 				 
@@ -324,15 +320,25 @@ public class GUI extends JFrame {
 		btnEnter_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String id = textField_2.getText();
-				String pass = textField_3.getText();
-				String name = "";
+				Student temp = null;
+				String id = null,name = null,pass = null;
+				boolean flag = false;
 				
-				Student temp = new Student(name,id,pass);
+				while (flag == false) {
+				id = textField_2.getText();
+				pass = textField_3.getText();
+				name = "";
 				
-				StudentArr.add(temp); // iff not already there TODO 
+				temp = new Student(name,id,pass);
 				
+				for (int i = 0;i<StudentArr.size();i++) {
+					if(temp != StudentArr.get(i))
+						flag = true;
+						
+					}
+				}		
 				
+				StudentArr.add(temp); 
 				// write the content in file 
 				try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
 				    String fileContent = name + " " + id + " " + pass ;
@@ -343,8 +349,9 @@ public class GUI extends JFrame {
 				
 				bookLayout.show(getContentPane(),"IntroPage");
 				
-			}
-		});
+									
+			
+			}});
 		btnEnter_1.setBounds(442, 185, 116, 25);
 		panel_1.add(btnEnter_1);
 		
@@ -391,9 +398,10 @@ public class GUI extends JFrame {
 		btnExitSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// just exit app here 
+				// just exit app here TODO
 			}
 		});
+		
 		// display loaned out books on 11
 		textField_11 = new JTextField();
 		textField_11.setEditable(false);
@@ -408,7 +416,7 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_9.getText();
-				// mark it returned 
+				// mark it returned remove it from arr and add it to avail and corresponding text files
 			}
 		});
 		btnNewButton_6.setBounds(12, 417, 116, 25);
@@ -419,7 +427,7 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_10.getText();
-				// mark it loaned 
+				// mark it loaned, add it to arr and text files 
 			}
 		});
 		btnNewButton_5.setBounds(208, 417, 133, 25);
