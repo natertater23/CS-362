@@ -1,50 +1,53 @@
 import java.util.*;
 
 public class Book {
+	String name, isbn;
 	boolean loaned;
-	Student student;
-	String checkOutDate, dueDate;
+	Date checkOutDate, dueDate;
 	
-	public Book(boolean loaned, Student student, String COD, String DD) {
-		this.student = student;
+	public Book(String name, String isbn, boolean loaned, Date COD, Date DD) {
+		this.name = name;
+		this.isbn = isbn;
 		this.loaned = loaned;
 		this.checkOutDate  = COD;
 		this.dueDate = DD;
 	}
 	
-	public Book() {
+	public Book(String name, String isbn) {
+		this.name = name;
+		this.isbn = isbn;
 		loaned = false;
-		student = null;
-		checkOutDate = "N/A";
-		dueDate = "N/A";
 	}
 	
+	
+	public String getName() {
+		return name;	}
+	public String getisbn() {
+		return isbn;	}
 	public boolean isLoaned() {
-		return loaned;	}
-	
-	public Student getStudent() {
-		return student;	}
-		
-	public String getCheckOutDate() {
+		return loaned;	}		
+	public Date getCheckOutDate() {
 		return checkOutDate;	}
-	
-	public String getDueDate() {
+	public Date getDueDate() {
 		return dueDate;	}
 	
 	
-	public void loan(Student stu) {
+	public void loan(Date date) {
 		loaned = true;	
-		student = stu;
+		checkOutDate = date;
+		dueDate = new Date();//need to change
 	}
-	
 	public void voidLoan() {
 		loaned = false;	
-		student = null;
+		checkOutDate = null;
+		dueDate = null;
 	}
 	
 	
 	
 	public String toString() {
-		output =  student.toString() + ;
+		if(loaned)
+			return (name + " was loaned on " + checkOutDate.toString() + " and is due by " + dueDate.toString());
+		return (name + " is not currenty loaned");
 	}
 }
