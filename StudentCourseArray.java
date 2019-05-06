@@ -15,16 +15,22 @@ public class StudentCourseArray {
 		courses = {};
 	}
 	
-	
+
+	public int size() {
+		return courses.size();	}
 	public String getEmail() {
-		return email;
-	}
-	
+		return email;	}
 	public ArrayList <Courses> getCourses() {	//returns an array of courses
-		return courses;
-	}
+		return courses;	}
 	
-	public String getCoursesDisplayed() { //returns a string of all courses in one line
+	
+	public void addCourse(Course course);{
+		courses.add(course);	}
+	public void removeCourse(Course course) {
+		courses.remove(course);	}
+	
+	
+	public String displayCourses() { //returns a string of all courses in one line
 		String str = courses.get(0);
 		for(int i = 1; i < courses.size(); i++) 
 			str += " " + courses.get(i).getName();
