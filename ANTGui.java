@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -38,14 +39,14 @@ public class GUI extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextArea textField_4;
 	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextArea textField_6;
 	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextArea textField_8;
 	private JTextField textField_9;
 	private JTextField textField_10;
-	private JTextField textField_11;
+	private JTextArea textField_11;
 	String myId = "";
 	String mypass = "";
 	
@@ -94,6 +95,7 @@ public class GUI extends JFrame {
 		ArrayList<Student> StudentArr = new ArrayList<Student>();
 		ArrayList<Admin> AdminArr = new ArrayList<Admin>();
 		ArrayList<Course> CourseArr = new ArrayList<Course>(); // all available courses 
+		ArrayList<Course> BookCourseArr = new ArrayList<Course>();
 		ArrayList<StudentCourseArray> StudentCourseArr = new ArrayList<StudentCourseArray>();
 		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
 		ArrayList<Book> LoanedBookArr = new ArrayList<Book>(); // all available books
@@ -157,6 +159,35 @@ public class GUI extends JFrame {
 		} catch (IOException e) {
 		    // exception handling
 		}
+		//Read in Course Books
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				    String line = bufferedReader.readLine();
+				    while(line != null) {
+				        System.out.println(line);
+				        
+				        line = bufferedReader.readLine();
+				        String name = line;
+				        
+				        line = bufferedReader.readLine();
+				        String c1;
+				        c1 = line;
+				      
+				        Book t1  = new Book(c1);
+				       
+				        ArrayList <Book> book = new ArrayList<Book>();
+				        book.add(t1);
+				        
+				        
+				        BookCourseArr.add(new Course(name,book));
+				       
+				       
+				       
+				    }
+				} catch (FileNotFoundException e) {
+				    // exception handling
+				} catch (IOException e) {
+				    // exception handling
+				}
 		//Read in Student Books
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 		    String line = bufferedReader.readLine();
@@ -419,17 +450,38 @@ public class GUI extends JFrame {
 		
 		
 		// This is where we list the avail courses to the student 
-		// with the saved id and pass we get it from the arr 	
+		// with the saved id and pass we get it from the arr 
+		//myId - global ID of student
+		//StudentCourseArr- (id,ArrayList)
+		//Obj - StudentCourseArray
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(12, 78, 177, 36);
 		panel_2.add(comboBox);
 		
+		
+		
 		//Display avail books to the selected class on 4
-		textField_4 = new JTextField();
+		textField_4 = new JTextArea();
 		textField_4.setEditable(false);
 		textField_4.setBounds(413, 65, 284, 169);
 		panel_2.add(textField_4);
 		textField_4.setColumns(10);
+		
+		String tempCourseName = textField_4.getSelectedText();
+		
+		for(int i = 0; i<BookCourseArr.size();i++) {
+			if(BookCourseArr.get(i).getName() == tempCourseName) {
+				for(int j = 0; j< BookCourseArr.get(i).getBooks().size();i++) {
+					
+					String name = BookCourseArr.get(i).getBooks().get(j) + "\n";
+					textField_4.append(name);
+					
+				}
+			}
+		}
+			
+		
+		// loop through coursebook
 		
 		textField_9 = new JTextField();
 		textField_9.setBounds(208, 382, 133, 22);
@@ -445,16 +497,33 @@ public class GUI extends JFrame {
 		btnExitSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// just exit app here TODO
+				// just exit app here 
+		        System.exit(0);
+
 			}
 		});
 		
-		// display loaned out books on 11
-		textField_11 = new JTextField();
+		// display loaned out books on 11 DONE
+		textField_11 = new JTextArea();
 		textField_11.setEditable(false);
-		textField_11.setBounds(413, 260, 284, 144);
+		textField_11.setBounds(413, 271, 284, 144);
 		panel_2.add(textField_11);
 		textField_11.setColumns(10);
+		
+		
+		
+		for(int i = 0; i<StudentBookArr.size();i++) {
+			if(StudentBookArr.get(i).getEmail() == myId) {
+				for(int j = 0; j< StudentBookArr.get(i).getBooks().size();i++) {
+					
+					String name = StudentBookArr.get(i).getBooks().get(j) + "\n";
+					textField_4.append(name);
+					
+				}
+			}
+		}
+		
+		
 		btnExitSave.setBounds(600, 417, 97, 25);
 		panel_2.add(btnExitSave);
 		
@@ -463,7 +532,10 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_9.getText();
-				// mark it returned remove it from arr and add it to avail and corresponding text files
+				textField_9.setText("");
+				
+				
+				// remove from studentbookarr, add to avail book list, 
 			}
 		});
 		btnNewButton_6.setBounds(12, 417, 116, 25);
@@ -475,6 +547,8 @@ public class GUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_10.getText();
 				// mark it loaned, add it to arr and text files 
+				
+				
 			}
 		});
 		btnNewButton_5.setBounds(208, 417, 133, 25);
@@ -484,11 +558,15 @@ public class GUI extends JFrame {
 		lblNewLabel_3.setBounds(12, 36, 177, 16);
 		panel_2.add(lblNewLabel_3);
 		
-		JLabel lblTextbooks = new JLabel("TextBooks:");
-		lblTextbooks.setBounds(413, 36, 107, 16);
+		JLabel lblTextbooks = new JLabel("Available TextBooks:");
+		lblTextbooks.setBounds(413, 36, 148, 16);
 		panel_2.add(lblTextbooks);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
+		JLabel lblNewLabel_6 = new JLabel("Currently Loaned Books:");
+		lblNewLabel_6.setBounds(413, 247, 148, 16);
+		panel_2.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Ant\\Desktop\\dT9rzapBc.png"));
 		lblNewLabel_4.setBounds(-135, -16, 844, 538);
 		panel_2.add(lblNewLabel_4);
@@ -510,8 +588,9 @@ public class GUI extends JFrame {
 				// Add course to list
 			}
 		});
-		btnAddCourse.setBounds(90, 365, 140, 25);
+		btnAddCourse.setBounds(154, 364, 140, 25);
 		panel_3.add(btnAddCourse);
+		
 		// 5 is the field for course remove/add/deactivate/activate
 		textField_5 = new JTextField();
 		textField_5.setBounds(154, 330, 140, 22);
@@ -526,33 +605,10 @@ public class GUI extends JFrame {
 				// Remove course from list
 			}
 		});
-		btnNewButton.setBounds(90, 402, 140, 25);
+		btnNewButton.setBounds(154, 403, 140, 25);
 		panel_3.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Activate Course\r\n");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				// Type code here 
-				String name = textField_5.getText();
-				// Make it de-gray
-			}
-		});
-		btnNewButton_1.setBounds(242, 365, 140, 25);
-		panel_3.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Deactivate Course");
-		btnNewButton_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String name = textField_5.getText();
-				// Gray out class 
-			}
-		});
-		btnNewButton_2.setBounds(242, 402, 140, 25);
-		panel_3.add(btnNewButton_2);
 		//ALL BOOKS DISPLAYED HERE 
-		textField_6 = new JTextField();
+		textField_6 = new JTextArea();
 		textField_6.setEditable(false);
 		textField_6.setBounds(443, 101, 235, 216);
 		panel_3.add(textField_6);
@@ -563,11 +619,12 @@ public class GUI extends JFrame {
 		panel_3.add(textField_7);
 		textField_7.setColumns(10);
 		// ALL COURSES DISPLAYED HERE ? 
-		textField_8 = new JTextField();
+		textField_8 = new JTextArea();
 		textField_8.setEditable(false);
 		textField_8.setBounds(154, 101, 198, 216);
 		panel_3.add(textField_8);
 		textField_8.setColumns(10);
+		
 		
 		JButton btnNewButton_4 = new JButton("Remove Book");
 		btnNewButton_4.addActionListener(new ActionListener() {
@@ -576,7 +633,7 @@ public class GUI extends JFrame {
 				// Remove Book from list 
 			}
 		});
-		btnNewButton_4.setBounds(443, 415, 127, 25);
+		btnNewButton_4.setBounds(443, 403, 127, 25);
 		panel_3.add(btnNewButton_4);
 		
 		JButton btnNewButton_3 = new JButton("Add Book");
@@ -587,7 +644,7 @@ public class GUI extends JFrame {
 				// Add Book to list 
 			}
 		});
-		btnNewButton_3.setBounds(443, 377, 127, 25);
+		btnNewButton_3.setBounds(443, 364, 127, 25);
 		panel_3.add(btnNewButton_3);
 		
 		JLabel lblNewLabel_5 = new JLabel("New label");
