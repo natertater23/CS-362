@@ -132,7 +132,7 @@ public class GUI extends JFrame {
 
 		}
 		//Read in Student Courses
-		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Student_Courses.txt"))) {  
 		    String line = bufferedReader.readLine();
 		    while(line != null) {
 		        System.out.println(line);
@@ -171,7 +171,7 @@ public class GUI extends JFrame {
 		    // exception handling
 		}
 		//Read in Course Books
-				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Book_Courses.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
 				        System.out.println(line);
@@ -200,7 +200,7 @@ public class GUI extends JFrame {
 				    // exception handling
 				}
 		//Read in Student Books
-		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\StudentBookArr.txt"))) {  
 		    String line = bufferedReader.readLine();
 		    while(line != null) {
 		        System.out.println(line);
@@ -261,7 +261,7 @@ public class GUI extends JFrame {
 				    // exception handling
 				}
 				//Read in courses 
-				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Courses.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
 				        System.out.println(line);
@@ -275,7 +275,7 @@ public class GUI extends JFrame {
 				    // exception handling
 				}
 				//Read in Available Books 
-				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\BookArr.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
 				        System.out.println(line);
@@ -290,7 +290,7 @@ public class GUI extends JFrame {
 				}
 				
 				// read in loaned Books 
-				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\LoanedBookArr.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
 				        System.out.println(line);
@@ -362,7 +362,7 @@ public class GUI extends JFrame {
 						bookLayout.show(getContentPane(), "StudentPage");
 
 					}
-					else if(id.equals(AdminArr.get(i).getEmail()) && pass.equals(AdminArr.get(i).getPassword()) ){
+					else if(id.equals(AdminArr.get(i).getid()) && pass.equals(AdminArr.get(i).getPassword()) ){
 						myId = id;
 						mypass = pass; 
 						flag = true;
@@ -725,71 +725,82 @@ public class GUI extends JFrame {
 		
 		
 		// End i/o 
-		// Student 
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		// StudentCourse
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		//StudentBook
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		//Admin
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		//Book
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		//totalbook
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		//loaned
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		//Courses
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
-		//book course
-		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
-		    String fileContent = "";
-		    bufferedWriter.write(fileContent);
-		} catch (IOException e1) {
-		    // exception handling
-		}
+        // Student 
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\students.txt"))) {
+            for(int i = 0; i < StudentArr.size(); i++)
+                bufferedWriter.write(StudentArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+        // StudentCourse
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Student_Course.txt"))) {
+            for(int i = 0; i < StudentCourseArr.size(); i++)
+                bufferedWriter.write(StudentCourseArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+        //StudentBook
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\StudentBookArr.txt"))) {
+            for(int i = 0; i < StudentBookArr.size(); i++)
+                bufferedWriter.write(StudentBookArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+//Admin
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\admins.txt"))) {
+            for(int i = 0; i < AdminArr.size(); i++)
+                bufferedWriter.write(AdminArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+        //Book
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\BookArr.txt"))) {
+            for(int i = 0; i < BookArr.size(); i++)
+                bufferedWriter.write(BookArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+        //totalbook
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\TotalBookArr.txt"))) {
+            for(int i = 0; i < TotalBookArr.size(); i++)
+                bufferedWriter.write(TotalBookArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+        //loaned
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\LoanedBookArr.txt"))) {
+            for(int i = 0; i < LoanedBookArr.size(); i++)
+                bufferedWriter.write(LoanedBookArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+        //Courses
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Courses.txt"))) {
+            for(int i = 0; i < CourseArr.size(); i++)
+                bufferedWriter.write(CourseArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+        //book course
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Book_Courses.txt"))) {
+            for(int i = 0; i < BookCourseArr.size(); i++)
+                bufferedWriter.write(BookCourseArr.get(i).toString());
+        } catch (IOException e1) {
+            // exception handling
+        }
+		/*ArrayList<Student> StudentArr = new ArrayList<Student>();
+		ArrayList<Admin> AdminArr = new ArrayList<Admin>();
 		
+		ArrayList<Course> CourseArr = new ArrayList<Course>(); // all available courses 
+		ArrayList<Course> BookCourseArr = new ArrayList<Course>();
+		ArrayList<StudentCourseArray> StudentCourseArr = new ArrayList<StudentCourseArray>();
+		
+		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
+		ArrayList<Book> LoanedBookArr = new ArrayList<Book>(); // all loaned books ?
+		ArrayList<Book> TotalBookArr = new ArrayList<Book>(); // TOTAL BOOK COUNT
+		ArrayList<StudentBookArray> StudentBookArr = new ArrayList<StudentBookArray>();*/
 
 		
 	}
 }
+
