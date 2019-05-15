@@ -613,7 +613,12 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String name = textField_5.getText();
-				// Remove course from list
+				// Remove course from listfor(int i = 0; i < CourseArr.size(); i++) {
+					
+					if(CourseArr.get(i).getName().equals(name))
+						CourseArr.remove(i);
+				
+				}
 			}
 		});
 		btnNewButton.setBounds(154, 403, 140, 25);
