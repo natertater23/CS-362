@@ -1,40 +1,36 @@
 import java.util.*;
 
 public class Student {
-	private String name, email, password;//potential id
-	StudentCourseArray courses = new StudentCourseArray();
-	StudentBookArray loanedBooks = new StudentBookArray();
+	private String name, id, password;
 	
-	public Student(String name, String email, String password, StudentCourseArray courses, StudentBookArray loanedBooks) {
+	public Student(String name, String id, String password) {
 		this.name = name;
-		this.email = email;
+		this.id = id;
 		this.password = password;
-		this.courses = courses;
-		this.loanedBooks = loanedBooks;
 	}
 	
-	public Student(String name, String email, String password) {
+	public Student(String name, String id, String password) {
 		this.name = name;
-		this.email = email;
+		this.id = id;
 		this.password = password;
 	}
 	
 	public Student() {
 		name = "Unavailable";
-		email = "";
+		id = "";
 		password = "";
 	}
 
 	
 	public String getName() {
 		return name;	}
-	public String getEmail() {
-		return email;	}
+	public String getid() {
+		return id;	}
 	public String getPassword() {
 		return password;	}
-	public StudentCourseArray getCourseArr(){
+	public ArrayList getCourseArr(){
 		return courses;	}
-	public StudentBookArray getBookArr(){
+	public ArrayList getBookArr(){
 		return loanedBooks;	}
 	public int totalLoaned() {
 		return loanedBooks.size();	}
@@ -56,16 +52,7 @@ public class Student {
 	public String displayCourses() {
 		return courses.displayCourses();	}
 	
-	
-	public void editProfile() {//Need to do
-		//change name
 		
-		//change email
-		
-		//change password
-	}
-	
-	
 	public void loan(Book book) {//Need to do***
 		book.loan(this);
 		loanedBooks.add(book);
@@ -74,7 +61,7 @@ public class Student {
 	
 	public String toString() {
 		if(!name.equals("Unavailable"))	//student exists
-			return ("Student name: " + name + "\nStudent email: " + email + "\n\n");
+			return (name + " " + id + password + "\n");
 		return "N/A\n\n";
 	}
 
