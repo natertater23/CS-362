@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -36,9 +37,9 @@ public class GUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
+	private JPasswordField textField_3;
 	private JTextArea textField_4;
 	private JTextField textField_5;
 	private JTextArea textField_6;
@@ -101,25 +102,34 @@ public class GUI extends JFrame {
 		ArrayList<Book> LoanedBookArr = new ArrayList<Book>(); // all loaned books ?
 		ArrayList<Book> TotalBookArr = new ArrayList<Book>(); // TOTAL BOOK COUNT
 		ArrayList<StudentBookArray> StudentBookArr = new ArrayList<StudentBookArray>();
-		
+	   
+
 		//Read in Students
-		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\students.txt"))) {  
+			
 		    String line = bufferedReader.readLine();
+		   
 		    while(line != null) {
-		        System.out.println(line);
-		        line = bufferedReader.readLine();
-		        String id = line.substring(0, line.indexOf(" ")); 
-		        line = line.substring(line.indexOf(" "));
-		        String pass = line.substring(0, line.indexOf(" "));
-		        line = line.substring(line.indexOf(" "));
-		        String name = line.substring(0, line.indexOf(" "));;
+		     
+		        
+		        String name = line.substring(0, line.indexOf(" ")); 
+		        line = line.substring(line.indexOf(" ")+1);
+		        String id = line.substring(0, line.indexOf(" "));
+		        line = line.substring(line.indexOf(" ")+1);
+		        String pass = line;
 		       Student temp = new Student(name,id,pass);
 		       StudentArr.add(temp);
+		       
+		       System.out.println(name + id + pass);
+		       line = bufferedReader.readLine();
 		    }
 		} catch (FileNotFoundException e) {
 		    // exception handling
+
 		} catch (IOException e) {
 		    // exception handling
+		   
+
 		}
 		//Read in Student Courses
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
@@ -229,16 +239,18 @@ public class GUI extends JFrame {
 		    // exception handling
 		}
 		//Read in Admin 
-				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("admins.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
 				        System.out.println(line);
 				        line = bufferedReader.readLine();
-				        String id = line.substring(0, line.indexOf(" ")); 
-				        line = line.substring(line.indexOf(" "));
-				        String pass = line.substring(0, line.indexOf(" "));
-				        line = line.substring(line.indexOf(" "));
-				        String name = line.substring(0, line.indexOf(" "));;
+				        String name = line.substring(0, line.indexOf(" ")); 
+				        line = line.substring(line.indexOf(" ")+1);
+				        String id = line.substring(0, line.indexOf(" "));
+				        line = line.substring(line.indexOf(" ")+1);
+				        String pass = line;
+				        
+				        
 				        
 				       Admin temp = new Admin(name,id,pass);
 				       AdminArr.add(temp);
@@ -262,7 +274,7 @@ public class GUI extends JFrame {
 				} catch (IOException e) {
 				    // exception handling
 				}
-				//Read in Available Books TODO
+				//Read in Available Books 
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
@@ -277,7 +289,7 @@ public class GUI extends JFrame {
 				    // exception handling
 				}
 				
-				// read in loaned Books TODO
+				// read in loaned Books 
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader(absolutePath))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
@@ -314,7 +326,7 @@ public class GUI extends JFrame {
 		lblEnterPassword.setBounds(12, 260, 101, 16);
 		panel.add(lblEnterPassword);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setBounds(185, 257, 116, 22);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
@@ -331,33 +343,46 @@ public class GUI extends JFrame {
 		btnEnter.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//bookLayout.show(getContentPane(), "StudentPage");
+
 				String id = textField.getText();
 				String pass = textField_1.getText();
 				boolean flag = false; 
 				
 				for(int i = 0 ; i< StudentArr.size();i++) {
-					if(id == StudentArr.get(i).getEmail() && pass == StudentArr.get(i).getPassword() )
+					if(id.equals(StudentArr.get(i).getEmail()) && pass.equals(StudentArr.get(i).getPassword()) )
 					{
 						
 						myId = id;
 						mypass = pass; 
 						flag = true;
+						// reset text
+						textField.setText("");
+						textField_1.setText("");
+						bookLayout.show(getContentPane(), "StudentPage");
+
 					}
-					else if(id == AdminArr.get(i).getEmail() && pass == AdminArr.get(i).getPassword() ){
-						bookLayout.show(getContentPane(), "AdminPage");					
+					else if(id.equals(AdminArr.get(i).getEmail()) && pass.equals(AdminArr.get(i).getPassword()) ){
 						myId = id;
 						mypass = pass; 
 						flag = true;
+						// reset text
+						textField.setText("");
+						textField_1.setText("");
+						
+
+						bookLayout.show(getContentPane(), "AdminPage");					
+
 					}
 					
+					
 				}
-				// reset text
+				
+				lblIncorrect.setEnabled(!flag); // Incorrect thing lights up red
 				textField.setText("");
 				textField_1.setText("");
 				 
-				lblIncorrect.setEnabled(!flag); // Incorrect thing lights up red
 				
-				bookLayout.show(getContentPane(), "StudentPage");
 
 			}
 		});
@@ -401,13 +426,14 @@ public class GUI extends JFrame {
 		panel_1.add(textField_2);
 		textField_2.setColumns(10);
 		
-		textField_3 = new JTextField();
+		textField_3 = new JPasswordField();
 		textField_3.setBounds(442, 137, 116, 22);
 		panel_1.add(textField_3);
 		textField_3.setColumns(10);
 		
 		JButton btnEnter_1 = new JButton("Enter");
 		btnEnter_1.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
@@ -415,19 +441,25 @@ public class GUI extends JFrame {
 				String id = null,name = null,pass = null;
 				boolean flag = false;
 				
-				while (flag == false) {
+				do {
 				id = textField_2.getText();
 				pass = textField_3.getText();
 				name = "";
 				
+				textField_2.setText("");
+				textField_3.setText("");
+
+				
 				temp = new Student(name,id,pass);
 				
 				for (int i = 0;i<StudentArr.size();i++) {
-					if(temp != StudentArr.get(i))
+					if(id.equals(StudentArr.get(i).getEmail()))
 						flag = true;
 						
 					}
-				}		
+				
+									// remove later just for testing 
+				}while (flag == true);	
 				
 				StudentArr.add(temp); 
 				// write the content in file
@@ -629,6 +661,12 @@ public class GUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String name = textField_5.getText();
 				// Remove course from list
+				for(int i = 0; i < CourseArr.size(); i++) {
+
+                    if(CourseArr.get(i).getName().equals(name))
+                        CourseArr.remove(i);
+
+                }
 				
 			}
 		});
@@ -657,7 +695,11 @@ public class GUI extends JFrame {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String bookName = textField_7.getText();
-				// Remove Book from list 
+				// Remove Book from list
+				for(int i = 0; i < BookArr.size(); i++) {
+                    if(TotalBookArr.get(i).getName().equals(bookName))
+                        TotalBookArr.remove(i);
+                }
 			}
 		});
 		btnNewButton_4.setBounds(443, 403, 127, 25);
@@ -669,6 +711,7 @@ public class GUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_7.getText();
 				// Add Book to list 
+				TotalBookArr.add(new Book(bookName));
 			}
 		});
 		btnNewButton_3.setBounds(443, 364, 127, 25);
@@ -682,6 +725,63 @@ public class GUI extends JFrame {
 		
 		
 		// End i/o 
+		// Student 
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		// StudentCourse
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		//StudentBook
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		//Admin
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		//Book
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		//totalbook
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		//loaned
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		//Courses
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
+		    String fileContent = "";
+		    bufferedWriter.write(fileContent);
+		} catch (IOException e1) {
+		    // exception handling
+		}
+		//book course
 		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(absolutePath))) {  
 		    String fileContent = "";
 		    bufferedWriter.write(fileContent);
