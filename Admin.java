@@ -1,41 +1,25 @@
 import java.util.*;
 
 public class Admin {
-	private String name, email, password;
-	//undecided if id will be used
+	private String name, id, password;
 	
-	public Admin(String name, String email, String password) {
+	public Admin(String name, String id, String password) {
 		this.name = name;
-		this.email = email;
+		this.id = id;
 		this.password = password;
 	}
 	
 
 	public String getName() {
 		return name;	}
-	public String getEmail() {
-		return email;	}
+	public String getid() {
+		return id;	}
 	public String getPassword() {
 		return password;	}
-	
-	
-	public void editProfile() {//Need to do
-		//change name
-		
-		//change email
-		
-		//change password
-	}
-	
-	
-	public void activateCourse(Course course) {
-		course.activate();	}
-	public void deactivateCourse(Course course) {
-		course.deactivate();	}
-	
+
 	
 	public String toString() {
-		return ("Admin: " + name + "\nEmail: " +  email + "\n\n");
+		return (name + " " + id + password + "\n");
 	}
 
 }
