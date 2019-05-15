@@ -73,7 +73,7 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
-		setTitle("Book Advantagitge");
+		setTitle("Book Advantage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 737, 525);
 		contentPane = new JPanel();
@@ -98,7 +98,8 @@ public class GUI extends JFrame {
 		ArrayList<Course> BookCourseArr = new ArrayList<Course>();
 		ArrayList<StudentCourseArray> StudentCourseArr = new ArrayList<StudentCourseArray>();
 		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
-		ArrayList<Book> LoanedBookArr = new ArrayList<Book>(); // all available books
+		ArrayList<Book> LoanedBookArr = new ArrayList<Book>(); // all loaned books ?
+		ArrayList<Book> TotalBookArr = new ArrayList<Book>(); // TOTAL BOOK COUNT
 		ArrayList<StudentBookArray> StudentBookArr = new ArrayList<StudentBookArray>();
 		
 		//Read in Students
@@ -292,7 +293,7 @@ public class GUI extends JFrame {
 				}
 				
 		JPanel panel = new JPanel();
-		contentPane.add(panel, "IntroPage");
+		contentPane.add(panel,"IntroPage");
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Welcome to Book Advantage");
@@ -337,7 +338,7 @@ public class GUI extends JFrame {
 				for(int i = 0 ; i< StudentArr.size();i++) {
 					if(id == StudentArr.get(i).getEmail() && pass == StudentArr.get(i).getPassword() )
 					{
-						bookLayout.show(getContentPane(), "StudentPage");
+						
 						myId = id;
 						mypass = pass; 
 						flag = true;
@@ -356,6 +357,8 @@ public class GUI extends JFrame {
 				 
 				lblIncorrect.setEnabled(!flag); // Incorrect thing lights up red
 				
+				bookLayout.show(getContentPane(), "StudentPage");
+
 			}
 		});
 		
@@ -398,7 +401,7 @@ public class GUI extends JFrame {
 		panel_1.add(textField_2);
 		textField_2.setColumns(10);
 		
-		textField_3 = new JPasswordField();
+		textField_3 = new JTextField();
 		textField_3.setBounds(442, 137, 116, 22);
 		panel_1.add(textField_3);
 		textField_3.setColumns(10);
@@ -407,6 +410,7 @@ public class GUI extends JFrame {
 		btnEnter_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
 				Student temp = null;
 				String id = null,name = null,pass = null;
 				boolean flag = false;
@@ -426,7 +430,8 @@ public class GUI extends JFrame {
 				}		
 				
 				StudentArr.add(temp); 
-				// write the content in file 
+				// write the content in file
+				
 				bookLayout.show(getContentPane(),"IntroPage");
 			
 			}});
@@ -454,18 +459,14 @@ public class GUI extends JFrame {
 		//myId - global ID of student
 		//StudentCourseArr- (id,ArrayList)
 		//Obj - StudentCourseArray
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(12, 78, 177, 36);
-		panel_2.add(comboBox);
-		
-		
+		JComboBox availCourses = new JComboBox();
+		availCourses.setBounds(12, 78, 177, 36);
+		panel_2.add(availCourses);
 		
 		for(int a = 0; a < StudentCourseArr.size(); a++) {
-			StudentCourseArray currentCourses = StudentCourseArr.get(a); //gives studentCourseArray
-			if(currentCourses.getEmail().equals(email)) {	//current student found
-				for(int b = 0; b < currentCourses.get(a).size())
-					availCourses.addItem(courses.get(a).get(b)); // returns course
-			System.out.println(currentCourses.displayCourses() + " added");
+			if(StudentCourseArr.get(a).getEmail().equals(myId)) {	//current student found
+				for(int b = 0; b < StudentCourseArr.get(a).getCourses().size();b++)
+					availCourses.addItem(StudentCourseArr.get(a).getCourses().get(b).getName()); // returns course
 			}
 		}	
 		
@@ -545,8 +546,20 @@ public class GUI extends JFrame {
 				String bookName = textField_9.getText();
 				textField_9.setText("");
 				
+				for(int i = 0 ; i<StudentBookArr.size();i++) {
+					if(StudentBookArr.get(i).getEmail()==myId) {
+						for(int j = 0; j < StudentBookArr.get(i).getBooks().size();j++) {		
+							if(StudentBookArr.get(i).getBook(j).getName() == bookName) {
+								StudentBookArr.get(i).getBooks().remove(j);
+								// removes book
+							}
+						}
+					}
+				}
 				
-				// remove from studentbookarr, add to avail book list, 
+				BookArr.add(new Book(bookName));
+				//adds it to the pool of avail books
+				
 			}
 		});
 		btnNewButton_6.setBounds(12, 417, 116, 25);
@@ -596,6 +609,8 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String name = textField_5.getText();
+				
+				CourseArr.add(new Course(name));
 				// Add course to list
 			}
 		});
@@ -613,12 +628,8 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String name = textField_5.getText();
-				// Remove course from listfor(int i = 0; i < CourseArr.size(); i++) {
-					
-					if(CourseArr.get(i).getName().equals(name))
-						CourseArr.remove(i);
+				// Remove course from list
 				
-				}
 			}
 		});
 		btnNewButton.setBounds(154, 403, 140, 25);
@@ -646,10 +657,7 @@ public class GUI extends JFrame {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String bookName = textField_7.getText();
-				// Remove Book from list for(int i = 0; i < BookArr.size(); i++) {
-					if(TotalBookArr.get(i).getName().equals(bookName))
-						TotalBookArr.remove(i);
-				}
+				// Remove Book from list 
 			}
 		});
 		btnNewButton_4.setBounds(443, 403, 127, 25);
@@ -661,7 +669,6 @@ public class GUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_7.getText();
 				// Add Book to list 
-				TotalBookArr.add(new Book(bookName));				
 			}
 		});
 		btnNewButton_3.setBounds(443, 364, 127, 25);
