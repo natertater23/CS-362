@@ -398,7 +398,7 @@ public class GUI extends JFrame {
 		panel_1.add(textField_2);
 		textField_2.setColumns(10);
 		
-		textField_3 = new JTextField();
+		textField_3 = new JPasswordField();
 		textField_3.setBounds(442, 137, 116, 22);
 		panel_1.add(textField_3);
 		textField_3.setColumns(10);
