@@ -45,6 +45,7 @@ public class GUI extends JFrame {
 	private JTextArea textField_6;
 	private JTextField textField_7;
 	private JTextArea textField_8;
+	private JTextArea textArea;
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextArea textField_11;
@@ -53,6 +54,7 @@ public class GUI extends JFrame {
 	
 	
 	CardLayout bookLayout = new CardLayout();
+	private JTextField textField_12;
 
 	/**
 	 * Launch the application.
@@ -120,7 +122,6 @@ public class GUI extends JFrame {
 		       Student temp = new Student(name,id,pass);
 		       StudentArr.add(temp);
 		       
-		       System.out.println(name + id + pass);
 		       line = bufferedReader.readLine();
 		    }
 		} catch (FileNotFoundException e) {
@@ -135,24 +136,26 @@ public class GUI extends JFrame {
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Student_Courses.txt"))) {  
 		    String line = bufferedReader.readLine();
 		    while(line != null) {
-		        System.out.println(line);
 		        
-		        line = bufferedReader.readLine();
 		        String id = line;
+		        String c1,c2,c3,c4;
 		        
 		        line = bufferedReader.readLine();
-		        String c1,c2,c3,c4;
-		        c1 = line;
-		        line = bufferedReader.readLine();
+		         c1 = line;
 		        Course t1  = new Course(c1);
+		        
+		        line = bufferedReader.readLine();
 		        c2 = line;
 		        Course t2  = new Course(c2);
+		        
 		        line = bufferedReader.readLine();
 		        c3 = line;
 		        Course t3  = new Course(c3);
+		        
 		        line = bufferedReader.readLine();
 		        c4 = line;
 		        Course t4  = new Course(c4);
+		        //System.out.println(id + c1 + c2 + c3 + c4);
 		        
 		        ArrayList <Course> courses = new ArrayList<Course>();
 		        courses.add(t1);
@@ -162,7 +165,8 @@ public class GUI extends JFrame {
 		        
 		        StudentCourseArr.add(new StudentCourseArray(id,courses));
 		       
-		       
+		        line = bufferedReader.readLine();
+
 		       
 		    }
 		} catch (FileNotFoundException e) {
@@ -174,9 +178,7 @@ public class GUI extends JFrame {
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Book_Courses.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
-				        System.out.println(line);
 				        
-				        line = bufferedReader.readLine();
 				        String name = line;
 				        
 				        line = bufferedReader.readLine();
@@ -191,7 +193,7 @@ public class GUI extends JFrame {
 				        
 				        BookCourseArr.add(new Course(name,book));
 				       
-				       
+
 				       
 				    }
 				} catch (FileNotFoundException e) {
@@ -203,25 +205,28 @@ public class GUI extends JFrame {
 		try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\StudentBookArr.txt"))) {  
 		    String line = bufferedReader.readLine();
 		    while(line != null) {
-		        System.out.println(line);
 		        
-		        line = bufferedReader.readLine();
 		        String id = line;
 		        
 		        line = bufferedReader.readLine();
 		        String c1,c2,c3,c4;
 		        c1 = line;
+		        
 		        line = bufferedReader.readLine();
 		        Book t1  = new Book(c1);
 		        c2 = line;
+		        
 		        Book t2  = new Book(c2);
 		        line = bufferedReader.readLine();
 		        c3 = line;
+		        
 		        Book t3  = new Book(c3);
 		        line = bufferedReader.readLine();
 		        c4 = line;
-		        Book t4  = new Book(c4);
 		        
+		        Book t4  = new Book(c4);
+		        //System.out.println(id + c1 + c2 + c3 + c4);
+
 		        ArrayList <Book> courses = new ArrayList<Book>();
 		        courses.add(t1);
 		        courses.add(t2);
@@ -229,7 +234,8 @@ public class GUI extends JFrame {
 		        courses.add(t4);
 		        
 		        StudentBookArr.add(new StudentBookArray(id,courses));
-		       
+		        line = bufferedReader.readLine();
+
 		       
 		       
 		    }
@@ -239,21 +245,23 @@ public class GUI extends JFrame {
 		    // exception handling
 		}
 		//Read in Admin 
-				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("admins.txt"))) {  
-				    String line = bufferedReader.readLine();
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\admins.txt"))) {  
+				    
+					String line = bufferedReader.readLine();
+
 				    while(line != null) {
-				        System.out.println(line);
-				        line = bufferedReader.readLine();
+				    	
 				        String name = line.substring(0, line.indexOf(" ")); 
 				        line = line.substring(line.indexOf(" ")+1);
 				        String id = line.substring(0, line.indexOf(" "));
 				        line = line.substring(line.indexOf(" ")+1);
 				        String pass = line;
-				        
-				        
+
 				        
 				       Admin temp = new Admin(name,id,pass);
 				       AdminArr.add(temp);
+				        line = bufferedReader.readLine();
+
 				    }
 				} catch (FileNotFoundException e) {
 				    // exception handling
@@ -264,10 +272,10 @@ public class GUI extends JFrame {
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Courses.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
-				        System.out.println(line);
-				        line = bufferedReader.readLine();
 				        Course temp = new Course(line);
 				       CourseArr.add(temp);
+				        line = bufferedReader.readLine();
+
 				    }
 				} catch (FileNotFoundException e) {
 				    // exception handling
@@ -278,25 +286,38 @@ public class GUI extends JFrame {
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\BookArr.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
-				        System.out.println(line);
-				        line = bufferedReader.readLine();
 				       Book temp = new Book(line);
 				       BookArr.add(temp);
+				        line = bufferedReader.readLine();
+
 				    }
 				} catch (FileNotFoundException e) {
 				    // exception handling
 				} catch (IOException e) {
 				    // exception handling
 				}
-				
+				//Read in Total Books 
+				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\TotalBookArr.txt"))) {  
+				    String line = bufferedReader.readLine();
+				    while(line != null) {
+				       Book temp = new Book(line);
+				       TotalBookArr.add(temp);
+				        line = bufferedReader.readLine();
+
+				    }
+				} catch (FileNotFoundException e) {
+				    // exception handling
+				} catch (IOException e) {
+				    // exception handling
+				}
 				// read in loaned Books 
 				try(BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\LoanedBookArr.txt"))) {  
 				    String line = bufferedReader.readLine();
 				    while(line != null) {
-				        System.out.println(line);
-				        line = bufferedReader.readLine();
 				        Book temp = new Book(line);
 				       LoanedBookArr.add(temp);
+				        line = bufferedReader.readLine();
+
 				    }
 				} catch (FileNotFoundException e) {
 				    // exception handling
@@ -359,10 +380,43 @@ public class GUI extends JFrame {
 						// reset text
 						textField.setText("");
 						textField_1.setText("");
+
+						for(int a = 0; a < StudentCourseArr.size(); a++) {
+							if(StudentCourseArr.get(a).getEmail().equals(myId)) {	//current student found
+								System.out.println(StudentCourseArr.get(a).getEmail());
+								for(int b = 0; b < StudentCourseArr.get(a).getCourses().size();b++) {
+									System.out.print(StudentCourseArr.get(a).getCourses().get(b).getName() + "\n");
+									textArea.append(StudentCourseArr.get(a).getCourses().get(b).getName() + "\n"); // returns course
+								}
+							}
+						}
+						for(int c = 0; c<StudentBookArr.size();c++) {
+							if(StudentBookArr.get(c).getEmail().equals(myId)) {
+								for(int d = 0; d< StudentBookArr.get(c).getBooks().size();d++) {
+									
+									String name = StudentBookArr.get(c).getBooks().get(d) + "\n";
+									textField_11.append(name);
+									
+								}
+							}
+						}
+						
+								for(int f = 0; f< BookArr.size();f++) {
+									
+									String name = BookArr.get(f).getName() + "\n";
+									textField_4.append(name);
+									
+								}
+							
+						
 						bookLayout.show(getContentPane(), "StudentPage");
 
 					}
-					else if(id.equals(AdminArr.get(i).getid()) && pass.equals(AdminArr.get(i).getPassword()) ){
+				}
+					
+				for(int i = 0 ; i< AdminArr.size();i++) {
+
+				if(  AdminArr.size() > 0 && id.equals(AdminArr.get(i).getid()) && pass.equals(AdminArr.get(i).getPassword()) ){
 						myId = id;
 						mypass = pass; 
 						flag = true;
@@ -374,9 +428,10 @@ public class GUI extends JFrame {
 						bookLayout.show(getContentPane(), "AdminPage");					
 
 					}
-					
-					
 				}
+					
+					
+				
 				
 				lblIncorrect.setEnabled(!flag); // Incorrect thing lights up red
 				textField.setText("");
@@ -411,6 +466,11 @@ public class GUI extends JFrame {
 		contentPane.add(panel_1, "CreatePage");
 		panel_1.setLayout(null);
 		
+		JLabel lblEnterYourName = new JLabel("Enter Your Name:");
+		lblEnterYourName.setForeground(Color.WHITE);
+		lblEnterYourName.setBounds(282, 55, 116, 16);
+		panel_1.add(lblEnterYourName);
+		
 		JLabel lblCreateId = new JLabel("Create ID: ");
 		lblCreateId.setForeground(Color.WHITE);
 		lblCreateId.setBounds(282, 95, 75, 16);
@@ -420,6 +480,11 @@ public class GUI extends JFrame {
 		lblCreatePassword.setForeground(Color.WHITE);
 		lblCreatePassword.setBounds(282, 140, 102, 16);
 		panel_1.add(lblCreatePassword);
+		
+		textField_12 = new JTextField();
+		textField_12.setBounds(442, 52, 116, 22);
+		panel_1.add(textField_12);
+		textField_12.setColumns(10);
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(442, 92, 116, 22);
@@ -444,8 +509,8 @@ public class GUI extends JFrame {
 				do {
 				id = textField_2.getText();
 				pass = textField_3.getText();
-				name = "";
-				
+				name = textField_12.getText();
+				textField_12.setText("");
 				textField_2.setText("");
 				textField_3.setText("");
 
@@ -453,7 +518,7 @@ public class GUI extends JFrame {
 				temp = new Student(name,id,pass);
 				
 				for (int i = 0;i<StudentArr.size();i++) {
-					if(id.equals(StudentArr.get(i).getEmail()))
+					if(StudentArr.size()>0 && id.equals(StudentArr.get(i).getEmail()))
 						flag = true;
 						
 					}
@@ -486,23 +551,6 @@ public class GUI extends JFrame {
 		panel_2.setLayout(null);
 		
 		
-		// This is where we list the avail courses to the student 
-		// with the saved id and pass we get it from the arr 
-		//myId - global ID of student
-		//StudentCourseArr- (id,ArrayList)
-		//Obj - StudentCourseArray
-		JComboBox availCourses = new JComboBox();
-		availCourses.setBounds(12, 78, 177, 36);
-		panel_2.add(availCourses);
-		
-		for(int a = 0; a < StudentCourseArr.size(); a++) {
-			if(StudentCourseArr.get(a).getEmail().equals(myId)) {	//current student found
-				for(int b = 0; b < StudentCourseArr.get(a).getCourses().size();b++)
-					availCourses.addItem(StudentCourseArr.get(a).getCourses().get(b).getName()); // returns course
-			}
-		}	
-		
-		
 		
 		//Display avail books to the selected class on 4
 		textField_4 = new JTextArea();
@@ -511,37 +559,148 @@ public class GUI extends JFrame {
 		panel_2.add(textField_4);
 		textField_4.setColumns(10);
 		
-		String tempCourseName = textField_4.getSelectedText();
 		
-		for(int i = 0; i<BookCourseArr.size();i++) {
-			if(BookCourseArr.get(i).getName() == tempCourseName) {
-				for(int j = 0; j< BookCourseArr.get(i).getBooks().size();i++) {
-					
-					String name = BookCourseArr.get(i).getBooks().get(j) + "\n";
-					textField_4.append(name);
-					
-				}
-			}
-		}
 			
 		
 		// loop through coursebook
 		
 		textField_9 = new JTextField();
-		textField_9.setBounds(208, 382, 133, 22);
+		textField_9.setBounds(12, 377, 116, 22);
 		panel_2.add(textField_9);
 		textField_9.setColumns(10);
 		
 		textField_10 = new JTextField();
-		textField_10.setBounds(12, 382, 116, 22);
+		textField_10.setBounds(192, 377, 131, 22);
 		panel_2.add(textField_10);
 		textField_10.setColumns(10);
 		
+		JButton btnNewButton_5 = new JButton("Check Out Book \r\n");
+		btnNewButton_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String bookName = textField_10.getText();
+				// mark it loaned, add it to arr and text files 
+				
+				textField_10.setText("");
+				
+				
+				for(int i = 0 ; i<StudentBookArr.size();i++) {
+					if(StudentBookArr.get(i).getEmail()==myId) {
+						StudentBookArr.get(i).getBooks().add(new Book(bookName));
+						
+						}
+					}
+				for(int i = 0 ; i <BookArr.size();i++) {
+					if(BookArr.get(i).getName().equals(bookName)) {
+						BookArr.remove(i);
+					}
+				}
+				LoanedBookArr.add(new Book(bookName));
+				
+			}
+		});
+		btnNewButton_5.setBounds(192, 417, 131, 25);
+		panel_2.add(btnNewButton_5);
 		JButton btnExitSave = new JButton("Exit & Save");
 		btnExitSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// just exit app here 
+				
+				// End i/o 
+		        // Student 
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\students.txt"))) {
+		            for(int i = 0; i < StudentArr.size(); i++) {
+		                bufferedWriter.write(StudentArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        // StudentCourse
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Student_Courses.txt"))) {
+		        	for (int i = 0;i<StudentCourseArr.size();i++) {		        		
+		    			bufferedWriter.write(StudentCourseArr.get(i).getEmail());
+		    			bufferedWriter.newLine();
+		    			for(int j = 0;j<StudentCourseArr.get(i).getCourses().size();j++) {
+		    				bufferedWriter.write(StudentCourseArr.get(i).getCourses().get(j).getName());
+		    				bufferedWriter.newLine();
+		    			}
+		    		}
+		            
+		       
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //StudentBook
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\StudentBookArr.txt"))) {
+		        	for (int i = 0;i<StudentBookArr.size();i++) {		        		
+		    			bufferedWriter.write(StudentBookArr.get(i).getEmail());
+		    			bufferedWriter.newLine();
+		    			for(int j = 0;j<StudentBookArr.get(i).getBooks().size();j++) {
+		    				bufferedWriter.write(StudentBookArr.get(i).getBooks().get(j).getName());
+		    				bufferedWriter.newLine();
+		    			}
+		    		}
+		        }
+		         catch (IOException e1) {
+		            // exception handling
+		        }
+		//Admin
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\admins.txt"))) {
+		            for(int i = 0; i < AdminArr.size(); i++) {
+		            bufferedWriter.write(AdminArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //Book
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\BookArr.txt"))) {
+		            for(int i = 0; i < BookArr.size(); i++) {
+		                bufferedWriter.write(BookArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //totalbook
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\TotalBookArr.txt"))) {
+		            for(int i = 0; i < TotalBookArr.size(); i++) {
+		                bufferedWriter.write(TotalBookArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //loaned
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\LoanedBookArr.txt"))) {
+		            for(int i = 0; i < LoanedBookArr.size(); i++) {
+		                bufferedWriter.write(LoanedBookArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //Courses
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Courses.txt"))) {
+		            for(int i = 0; i < CourseArr.size(); i++) {
+		                bufferedWriter.write(CourseArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //book course
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Book_Courses.txt"))) {
+		            for(int i = 0; i < BookCourseArr.size(); i++) {
+		                bufferedWriter.write(BookCourseArr.get(i).toString());
+		                bufferedWriter.newLine();
+		            }
+		            
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
 		        System.exit(0);
 
 			}
@@ -555,17 +714,12 @@ public class GUI extends JFrame {
 		textField_11.setColumns(10);
 		
 		
+	
 		
-		for(int i = 0; i<StudentBookArr.size();i++) {
-			if(StudentBookArr.get(i).getEmail() == myId) {
-				for(int j = 0; j< StudentBookArr.get(i).getBooks().size();i++) {
-					
-					String name = StudentBookArr.get(i).getBooks().get(j) + "\n";
-					textField_4.append(name);
-					
-				}
-			}
-		}
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setBounds(22, 75, 284, 159);
+		panel_2.add(textArea);
 		
 		
 		btnExitSave.setBounds(600, 417, 97, 25);
@@ -588,6 +742,11 @@ public class GUI extends JFrame {
 						}
 					}
 				}
+				for(int i = 0 ; i <LoanedBookArr.size();i++) {
+					if(LoanedBookArr.get(i).getName().equals(bookName)) {
+						LoanedBookArr.remove(i);
+					}
+				}
 				
 				BookArr.add(new Book(bookName));
 				//adds it to the pool of avail books
@@ -597,18 +756,8 @@ public class GUI extends JFrame {
 		btnNewButton_6.setBounds(12, 417, 116, 25);
 		panel_2.add(btnNewButton_6);
 		
-		JButton btnNewButton_5 = new JButton("Check Out Book \r\n");
-		btnNewButton_5.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String bookName = textField_10.getText();
-				// mark it loaned, add it to arr and text files 
-				
-				
-			}
-		});
-		btnNewButton_5.setBounds(208, 417, 133, 25);
-		panel_2.add(btnNewButton_5);
+		
+		
 		
 		JLabel lblNewLabel_3 = new JLabel("Eligible Courses:");
 		lblNewLabel_3.setBounds(12, 36, 177, 16);
@@ -641,7 +790,8 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String name = textField_5.getText();
-				
+				textField_5.setText("");
+
 				CourseArr.add(new Course(name));
 				// Add course to list
 			}
@@ -660,6 +810,7 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String name = textField_5.getText();
+				textField_5.setText("");
 				// Remove course from list
 				for(int i = 0; i < CourseArr.size(); i++) {
 
@@ -670,6 +821,111 @@ public class GUI extends JFrame {
 				
 			}
 		});
+		
+		JButton btnExitAndSave = new JButton("Exit and Save");
+		btnExitAndSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				// End i/o 
+		        // Student 
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\students.txt"))) {
+		            for(int i = 0; i < StudentArr.size(); i++) {
+		                bufferedWriter.write(StudentArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        // StudentCourse
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Student_Courses.txt"))) {
+		        	for (int i = 0;i<StudentCourseArr.size();i++) {		        		
+		    			bufferedWriter.write(StudentCourseArr.get(i).getEmail());
+		    			bufferedWriter.newLine();
+		    			for(int j = 0;j<StudentCourseArr.get(i).getCourses().size();j++) {
+		    				bufferedWriter.write(StudentCourseArr.get(i).getCourses().get(j).getName());
+		    				bufferedWriter.newLine();
+		    			}
+		    		}
+		            
+		       
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //StudentBook
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\StudentBookArr.txt"))) {
+		        	for (int i = 0;i<StudentBookArr.size();i++) {		        		
+		    			bufferedWriter.write(StudentBookArr.get(i).getEmail());
+		    			bufferedWriter.newLine();
+		    			for(int j = 0;j<StudentBookArr.get(i).getBooks().size();j++) {
+		    				bufferedWriter.write(StudentBookArr.get(i).getBooks().get(j).getName());
+		    				bufferedWriter.newLine();
+		    			}
+		    		}
+		        }
+		         catch (IOException e1) {
+		            // exception handling
+		        }
+		//Admin
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\admins.txt"))) {
+		            for(int i = 0; i < AdminArr.size(); i++) {
+		            bufferedWriter.write(AdminArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //Book
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\BookArr.txt"))) {
+		            for(int i = 0; i < BookArr.size(); i++) {
+		                bufferedWriter.write(BookArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //totalbook
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\TotalBookArr.txt"))) {
+		            for(int i = 0; i < TotalBookArr.size(); i++) {
+		                bufferedWriter.write(TotalBookArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //loaned
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\LoanedBookArr.txt"))) {
+		            for(int i = 0; i < LoanedBookArr.size(); i++) {
+		                bufferedWriter.write(LoanedBookArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //Courses
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Courses.txt"))) {
+		            for(int i = 0; i < CourseArr.size(); i++) {
+		                bufferedWriter.write(CourseArr.get(i).toString());
+		            bufferedWriter.newLine();
+		        }
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        //book course
+		        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Book_Courses.txt"))) {
+		            for(int i = 0; i < BookCourseArr.size(); i++) {
+		                bufferedWriter.write(BookCourseArr.get(i).toString());
+		                bufferedWriter.newLine();
+		            }
+		            
+		        } catch (IOException e1) {
+		            // exception handling
+		        }
+		        System.exit(0);
+			}
+		});
+		btnExitAndSave.setBounds(581, 430, 116, 25);
+		panel_3.add(btnExitAndSave);
 		btnNewButton.setBounds(154, 403, 140, 25);
 		panel_3.add(btnNewButton);
 		//ALL BOOKS DISPLAYED HERE 
@@ -678,6 +934,10 @@ public class GUI extends JFrame {
 		textField_6.setBounds(443, 101, 235, 216);
 		panel_3.add(textField_6);
 		textField_6.setColumns(10);
+		
+		for(int i = 0; i < TotalBookArr.size(); i++)
+            textField_6.append((TotalBookArr.get(i).getName() + "\n"));
+		
 		// 7 is for the book remove/add
 		textField_7 = new JTextField();
 		textField_7.setBounds(443, 330, 127, 22);
@@ -690,11 +950,15 @@ public class GUI extends JFrame {
 		panel_3.add(textField_8);
 		textField_8.setColumns(10);
 		
+		for(int k = 0; k < CourseArr.size(); k++)
+			textField_8.append(CourseArr.get(k).getName() + "\n");
 		
 		JButton btnNewButton_4 = new JButton("Remove Book");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String bookName = textField_7.getText();
+				textField_7.setText("");
+				
 				// Remove Book from list
 				for(int i = 0; i < BookArr.size(); i++) {
                     if(TotalBookArr.get(i).getName().equals(bookName))
@@ -710,8 +974,14 @@ public class GUI extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_7.getText();
-				// Add Book to list 
+				// Add Book to list
+				textField_7.setText("");
+
 				TotalBookArr.add(new Book(bookName));
+				
+	     
+	            
+
 			}
 		});
 		btnNewButton_3.setBounds(443, 364, 127, 25);
@@ -723,84 +993,7 @@ public class GUI extends JFrame {
 		
 		panel_3.add(lblNewLabel_5);
 		
-		
-		// End i/o 
-        // Student 
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\students.txt"))) {
-            for(int i = 0; i < StudentArr.size(); i++)
-                bufferedWriter.write(StudentArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-        // StudentCourse
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Student_Course.txt"))) {
-            for(int i = 0; i < StudentCourseArr.size(); i++)
-                bufferedWriter.write(StudentCourseArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-        //StudentBook
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\StudentBookArr.txt"))) {
-            for(int i = 0; i < StudentBookArr.size(); i++)
-                bufferedWriter.write(StudentBookArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-//Admin
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\admins.txt"))) {
-            for(int i = 0; i < AdminArr.size(); i++)
-                bufferedWriter.write(AdminArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-        //Book
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\BookArr.txt"))) {
-            for(int i = 0; i < BookArr.size(); i++)
-                bufferedWriter.write(BookArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-        //totalbook
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\TotalBookArr.txt"))) {
-            for(int i = 0; i < TotalBookArr.size(); i++)
-                bufferedWriter.write(TotalBookArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-        //loaned
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\LoanedBookArr.txt"))) {
-            for(int i = 0; i < LoanedBookArr.size(); i++)
-                bufferedWriter.write(LoanedBookArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-        //Courses
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Courses.txt"))) {
-            for(int i = 0; i < CourseArr.size(); i++)
-                bufferedWriter.write(CourseArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-        //book course
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("C:\\Users\\Ant\\eclipse-workspace\\Book\\src\\Book_Courses.txt"))) {
-            for(int i = 0; i < BookCourseArr.size(); i++)
-                bufferedWriter.write(BookCourseArr.get(i).toString());
-        } catch (IOException e1) {
-            // exception handling
-        }
-		/*ArrayList<Student> StudentArr = new ArrayList<Student>();
-		ArrayList<Admin> AdminArr = new ArrayList<Admin>();
-		
-		ArrayList<Course> CourseArr = new ArrayList<Course>(); // all available courses 
-		ArrayList<Course> BookCourseArr = new ArrayList<Course>();
-		ArrayList<StudentCourseArray> StudentCourseArr = new ArrayList<StudentCourseArray>();
-		
-		ArrayList<Book> BookArr = new ArrayList<Book>(); // all available books
-		ArrayList<Book> LoanedBookArr = new ArrayList<Book>(); // all loaned books ?
-		ArrayList<Book> TotalBookArr = new ArrayList<Book>(); // TOTAL BOOK COUNT
-		ArrayList<StudentBookArray> StudentBookArr = new ArrayList<StudentBookArray>();*/
-
+	
 		
 	}
 }
-
