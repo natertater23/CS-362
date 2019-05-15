@@ -460,6 +460,17 @@ public class GUI extends JFrame {
 		
 		
 		
+		for(int a = 0; a < StudentCourseArr.size(); a++) {
+			StudentCourseArray currentCourses = StudentCourseArr.get(a); //gives studentCourseArray
+			if(currentCourses.getEmail().equals(email)) {	//current student found
+				for(int b = 0; b < currentCourses.get(a).size())
+					availCourses.addItem(courses.get(a).get(b)); // returns course
+			System.out.println(currentCourses.displayCourses() + " added");
+			}
+		}	
+		
+		
+		
 		//Display avail books to the selected class on 4
 		textField_4 = new JTextArea();
 		textField_4.setEditable(false);
