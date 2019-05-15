@@ -641,7 +641,10 @@ public class GUI extends JFrame {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String bookName = textField_7.getText();
-				// Remove Book from list 
+				// Remove Book from list for(int i = 0; i < BookArr.size(); i++) {
+					if(TotalBookArr.get(i).getName().equals(bookName))
+						TotalBookArr.remove(i);
+				}
 			}
 		});
 		btnNewButton_4.setBounds(443, 403, 127, 25);
@@ -653,6 +656,7 @@ public class GUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				String bookName = textField_7.getText();
 				// Add Book to list 
+				TotalBookArr.add(new Book(bookName));				
 			}
 		});
 		btnNewButton_3.setBounds(443, 364, 127, 25);
